@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Management Notes — Exam Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0F1B2D;
+    --surface:   #162236;
+    --card:      #1C2E47;
+    --border:    #263d5c;
+    --text:      #F0EBE1;
+    --muted:     #8BA3BE;
+    --amber:     #E8A838;
+    --amber-dim: #9C6E1A;
+    --green:     #4CAF7D;
+    --red:       #C0392B;
+    --blue:      #4A90D9;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans:  'Inter', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  nav {
+    width: 240px;
+    min-width: 240px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-title {
+    font-family: var(--font-serif);
+    color: var(--amber);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  nav a {
+    display: block;
+    padding: 9px 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: color .18s, border-color .18s, background .18s;
+    line-height: 1.4;
+  }
+  nav a:hover, nav a.active {
+    color: var(--text);
+    border-left-color: var(--amber);
+    background: rgba(232,168,56,.06);
+  }
+  nav a .ch-num {
+    display: block;
+    font-size: 10px;
+    color: var(--amber-dim);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    max-width: 860px;
+    padding: 48px 48px 80px;
+    overflow-x: hidden;
+  }
+
+  .page-header {
+    margin-bottom: 52px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-header .tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .page-header h1 {
+    font-family: var(--font-serif);
+    font-size: 34px;
+    color: var(--text);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .page-header p {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* ── CHAPTER SECTION ── */
+  .chapter {
+    margin-bottom: 64px;
+    scroll-margin-top: 32px;
+  }
+
+  .chapter-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .chapter-num {
+    background: var(--amber);
+    color: #0F1B2D;
+    font-family: var(--font-serif);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .chapter-title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  /* ── SECTION BLOCKS ── */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--amber);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* ── DEFINITION GRID ── */
+  .def-grid {
+    display: grid;
+    gap: 8px;
+  }
+  .def-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 12px;
+  }
+  .def-term {
+    font-weight: 600;
+    color: var(--blue);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .def-body {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── CONCEPT LIST ── */
+  .concept-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .concept-item {
+    background: var(--card);
+    border-left: 3px solid var(--border);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .concept-item strong { color: var(--text); }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    border-left: 4px solid;
+  }
+  .callout.tip   { background: rgba(76,175,125,.08); border-color: var(--green); color: #a8d9bc; }
+  .callout.warn  { background: rgba(192,57,43,.08);  border-color: var(--red);   color: #e0948d; }
+  .callout.mem   { background: rgba(232,168,56,.08); border-color: var(--amber); color: #c9a06a; }
+  .callout .callout-title {
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .callout.tip  .callout-title { color: var(--green); }
+  .callout.warn .callout-title { color: var(--red); }
+  .callout.mem  .callout-title { color: var(--amber); }
+  .callout strong { color: var(--text); }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead tr {
+    background: rgba(232,168,56,.12);
+  }
+  th {
+    text-align: left;
+    padding: 10px 16px;
+    color: var(--amber);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .04em;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 16px;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(38,61,92,.6);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  td:first-child { color: var(--text); font-weight: 500; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,.02); }
+
+  /* ── SUMMARY PILLS ── */
+  .summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .summary-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .summary-item::before {
+    content: '▸';
+    color: var(--amber);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── FRAMEWORK GRID ── */
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .framework-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .framework-card .fc-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .framework-card .fc-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── PROCESS STEPS ── */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 2px solid var(--border);
+    margin-left: 8px;
+    padding-left: 20px;
+  }
+  .step {
+    position: relative;
+    padding-bottom: 18px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .step:last-child { padding-bottom: 0; }
+  .step::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--amber);
+    border: 2px solid var(--bg);
+  }
+  .step strong { color: var(--text); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 720px) {
+    body { flex-direction: column; }
+    nav { width: 100%; min-width: 0; height: auto; position: static; flex-direction: row; overflow-x: auto; padding: 12px 0; border-right: none; border-bottom: 1px solid var(--border); }
+    .nav-title { display: none; }
+    nav a { white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; padding: 6px 14px; }
+    nav a:hover, nav a.active { border-left-color: transparent; border-bottom-color: var(--amber); }
+    nav a .ch-num { display: none; }
+    main { padding: 28px 20px 60px; }
+    .def-item { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav>
+  <div class="nav-title">Management<br>Exam Prep</div>
+  <a href="#ch8"><span class="ch-num">Chapter 8</span>Planning Work</a>
+  <a href="#ch9"><span class="ch-num">Chapter 9</span>Competitive Advantage</a>
+  <a href="#ch11"><span class="ch-num">Chapter 11</span>Org Structure</a>
+  <a href="#ch12"><span class="ch-num">Chapter 12</span>Human Resources</a>
+  <a href="#ch17"><span class="ch-num">Ch 17 & 18</span>Leading & Controlling</a>
+  <a href="#change"><span class="ch-num">Module</span>Managing Change</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <div class="page-header">
+    <div class="tag">Study Notes</div>
+    <h1>Principles of Management</h1>
+    <p>Chapters 8, 9, 11, 12 · Leadership & Control · Change & Innovation</p>
+  </div>
+
+  <!-- ── CHAPTER 8 ── -->
+  <section class="chapter" id="ch8">
+    <div class="chapter-header">
+      <span class="chapter-num">Ch 8</span>
+      <h2 class="chapter-title">Planning Work Activities</h2>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Definitions</div>
+      <div class="def-grid">
+        <div class="def-item"><span class="def-term">Planning</span><span class="def-body">Defining goals, establishing strategies, and developing plans to integrate and coordinate activities.</span></div>
+        <div class="def-item"><span class="def-term">Stated Goals</span><span class="def-body">Official statements of what an organization says its goals are to stakeholders.</span></div>
+        <div class="def-item"><span class="def-term">Real Goals</span><span class="def-body">The goals an organization actually pursues, as evidenced by what members do.</span></div>
+        <div class="def-item"><span class="def-term">MBO</span><span class="def-body">Management by Objectives — mutually agreed-upon goals used to evaluate performance.</span></div>
+        <div class="def-item"><span class="def-term">Environmental Scanning</span><span class="def-body">Screening information to detect emerging trends in the external environment.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Why Planning Matters</div>
+      <div class="concept-list">
+        <div class="concept-item"><strong>Provides direction</strong> — aligns departments toward the same goals.</div>
+        <div class="concept-item"><strong>Reduces uncertainty</strong> — anticipates change before it happens.</div>
+        <div class="concept-item"><strong>Minimizes waste & redundancy</strong> — stops departments working at cross-purposes.</div>
+        <div class="concept-item"><strong>Sets control standards</strong> — the plan becomes the benchmark for evaluation.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Strategic vs. Operational Plans</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Strategic Plans</th><th>Operational Plans</th></tr></thead>
+          <tbody>
+            <tr><td>Breadth</td><td>Entire organization</td><td>Particular operational area</td></tr>
+            <tr><td>Time Frame</td><td>Long-term</td><td>Short-term</td></tr>
+            <tr><td>Goal Focus</td><td>Overall goals</td><td>Narrow, specific goals</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Specific vs. Directional Plans</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Specific Plans</th><th>Directional Plans</th></tr></thead>
+          <tbody>
+            <tr><td>Definition</td><td>Clearly defined, no room for interpretation</td><td>Flexible, set out general guidelines</td></tr>
+            <tr><td>When to Use</td><td>Stable environments</td><td>High environmental uncertainty</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Single-Use vs. Standing Plans</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Single-Use Plans</th><th>Standing Plans</th></tr></thead>
+          <tbody>
+            <tr><td>Frequency</td><td>Used once for a unique situation</td><td>Used repeatedly for recurring activities</td></tr>
+            <tr><td>Examples</td><td>Budgets, specific projects</td><td>Policies, rules, procedures</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout mem">
+      <div class="callout-title">🧠 Memory Trick</div>
+      MBO goals are <strong>SPEC</strong>: <strong>S</strong>pecificity · <strong>P</strong>articipative · <strong>E</strong>xplicit time period · <strong>C</strong>onstant feedback
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-title">⭐ Exam Tips — High Yield</div>
+      Differences between <strong>Stated vs. Real goals</strong> and <strong>Strategic vs. Operational plans</strong> are frequently tested.
+    </div>
+    <div class="callout warn">
+      <div class="callout-title">⚠ Common Mistake</div>
+      Students forget that planning <strong>must be flexible</strong> in dynamic environments — don't treat plans as fixed.
+    </div>
+  </section>
+
+  <!-- ── CHAPTER 9 ── -->
+  <section class="chapter" id="ch9">
+    <div class="chapter-header">
+      <span class="chapter-num">Ch 9</span>
+      <h2 class="chapter-title">Competitive Advantage &amp; Strategy</h2>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Definitions</div>
+      <div class="def-grid">
+        <div class="def-item"><span class="def-term">Competitive Advantage</span><span class="def-body">What sets an organization apart; its distinctive edge.</span></div>
+        <div class="def-item"><span class="def-term">Competitive Necessity</span><span class="def-body">Factors required just to stay in the game, rather than to lead.</span></div>
+        <div class="def-item"><span class="def-term">SWOT Analysis</span><span class="def-body">Evaluation of Strengths, Weaknesses, Opportunities, and Threats — the foundational strategy tool.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Levels of Strategy</div>
+      <div class="steps">
+        <div class="step"><strong>Corporate</strong> — the overall direction of the entire business.</div>
+        <div class="step"><strong>Competitive</strong> — how each business unit will compete in its specific market.</div>
+        <div class="step"><strong>Functional</strong> — how specific departments (HR, Marketing) support the competitive strategy.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Porter's Competitive Strategies</div>
+      <div class="framework-grid">
+        <div class="framework-card">
+          <div class="fc-title">Cost Leadership</div>
+          <div class="fc-body">Aim to be the lowest-cost producer in the industry.<br><em>Ex: Hotel minimizing costs for lowest room rates.</em></div>
+        </div>
+        <div class="framework-card">
+          <div class="fc-title">Differentiation</div>
+          <div class="fc-body">Offer unique products customers value and are willing to pay more for.<br><em>Ex: Hotel offering luxury/themed rooms.</em></div>
+        </div>
+        <div class="framework-card">
+          <div class="fc-title">Focus Strategy</div>
+          <div class="fc-body">Target a specific narrow segment or niche market rather than the broad industry.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-title">⭐ Professor Emphasis</div>
+      Know the link between <strong>competitive strategy → functional strategy</strong> (e.g., how HR policy changes to support a cost-leadership goal).
+    </div>
+  </section>
+
+  <!-- ── CHAPTER 11 ── -->
+  <section class="chapter" id="ch11">
+    <div class="chapter-header">
+      <span class="chapter-num">Ch 11</span>
+      <h2 class="chapter-title">Designing Organizational Structure</h2>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Definitions</div>
+      <div class="def-grid">
+        <div class="def-item"><span class="def-term">Organizing</span><span class="def-body">Arranging and structuring work to accomplish organizational goals.</span></div>
+        <div class="def-item"><span class="def-term">Organizational Structure</span><span class="def-body">The formal arrangement of jobs within an organization.</span></div>
+        <div class="def-item"><span class="def-term">Chain of Command</span><span class="def-body">The line of authority extending from upper levels to the lowest levels.</span></div>
+        <div class="def-item"><span class="def-term">Span of Control</span><span class="def-body">The number of subordinates a manager can efficiently and effectively manage.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">The 6 Elements of Organizational Design</div>
+      <div class="framework-grid">
+        <div class="framework-card"><div class="fc-title">1. Work Specialization</div><div class="fc-body">Dividing work into separate job tasks.</div></div>
+        <div class="framework-card"><div class="fc-title">2. Departmentalization</div><div class="fc-body">Grouping jobs (Functional, Product, Customer…)</div></div>
+        <div class="framework-card"><div class="fc-title">3. Chain of Command</div><div class="fc-body">Line of authority top → bottom.</div></div>
+        <div class="framework-card"><div class="fc-title">4. Span of Control</div><div class="fc-body">Number of direct reports per manager.</div></div>
+        <div class="framework-card"><div class="fc-title">5. Centralization</div><div class="fc-body">Decision-making concentrated at the top vs. delegated down.</div></div>
+        <div class="framework-card"><div class="fc-title">6. Formalization</div><div class="fc-body">Degree to which jobs are standardized and rule-governed.</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Mechanistic vs. Organic</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Structure</th><th>Characteristics</th><th>Best Used When…</th></tr></thead>
+          <tbody>
+            <tr><td>Mechanistic</td><td>Rigid, stable, tight controls, high formalization</td><td>Environment is stable; goal is cost control</td></tr>
+            <tr><td>Organic</td><td>Flexible, adaptive, free-flowing info, low formalization</td><td>Environment is uncertain; goal is innovation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout mem">
+      <div class="callout-title">🔑 Key Rule</div>
+      <strong>Structure must follow strategy.</strong> You choose the design based on what the organization is trying to achieve.
+    </div>
+  </section>
+
+  <!-- ── CHAPTER 12 ── -->
+  <section class="chapter" id="ch12">
+    <div class="chapter-header">
+      <span class="chapter-num">Ch 12</span>
+      <h2 class="chapter-title">Managing Human Resources</h2>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Definitions</div>
+      <div class="def-grid">
+        <div class="def-item"><span class="def-term">HR Planning</span><span class="def-body">Ensuring the right number and kinds of people are in the right places at the right times.</span></div>
+        <div class="def-item"><span class="def-term">Affirmative Action</span><span class="def-body">Programs that enhance the status of protected groups.</span></div>
+        <div class="def-item"><span class="def-term">Selection</span><span class="def-body">Screening applicants to hire the most appropriate candidates.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">The HRM Process</div>
+      <div class="steps">
+        <div class="step"><strong>Planning</strong> — assess future HR needs.</div>
+        <div class="step"><strong>Recruitment</strong> — locate and attract capable applicants.</div>
+        <div class="step"><strong>Decruitment</strong> — reduce the workforce (layoffs, attrition, early retirement).</div>
+        <div class="step"><strong>Selection</strong> — screen and hire the best fit.</div>
+        <div class="step"><strong>Orientation</strong> — onboard and introduce to the organization.</div>
+        <div class="step"><strong>Training</strong> — develop skills for current and future roles.</div>
+        <div class="step"><strong>Performance Management</strong> — evaluate, give feedback, and reward.</div>
+        <div class="step"><strong>Retention</strong> — keep high performers engaged.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Recruitment vs. Decruitment</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Concept</th><th>Recruitment</th><th>Decruitment</th></tr></thead>
+          <tbody>
+            <tr><td>Goal</td><td>Locate and attract capable applicants</td><td>Reduce the workforce</td></tr>
+            <tr><td>Methods</td><td>Referrals, ads, social media</td><td>Layoffs, attrition, early retirement</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-title">⭐ Why HR = Competitive Advantage</div>
+      HR <strong>cannot be easily imitated</strong> — skilled, motivated people are a resource rivals can't simply copy overnight.
+    </div>
+  </section>
+
+  <!-- ── CH 17 & 18 ── -->
+  <section class="chapter" id="ch17">
+    <div class="chapter-header">
+      <span class="chapter-num">Ch 17–18</span>
+      <h2 class="chapter-title">Leading &amp; Controlling</h2>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Definitions</div>
+      <div class="def-grid">
+        <div class="def-item"><span class="def-term">Leader</span><span class="def-body">Someone who can influence others and has managerial authority.</span></div>
+        <div class="def-item"><span class="def-term">Controlling</span><span class="def-body">Monitoring, comparing, and correcting work performance against set standards.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">The 3-Step Control Process</div>
+      <div class="steps">
+        <div class="step"><strong>Measure</strong> actual performance (quantitative or qualitative).</div>
+        <div class="step"><strong>Compare</strong> performance against the predetermined standard.</div>
+        <div class="step"><strong>Take action</strong> — correct significant deviations.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Types of Corrective Action</div>
+      <div class="concept-list">
+        <div class="concept-item"><strong>Immediate Corrective Action</strong> — fixes the problem at once without investigating root cause.</div>
+        <div class="concept-item"><strong>Basic Corrective Action</strong> — investigates <em>why</em> and <em>how</em> the deviation occurred, then corrects the source.</div>
+      </div>
+    </div>
+
+    <div class="callout mem">
+      <div class="callout-title">📌 Key Concept</div>
+      The <strong>Range of Variation</strong> determines when a deviation is significant enough to require action — not every gap from standard needs a response.
+    </div>
+  </section>
+
+  <!-- ── CHANGE ── -->
+  <section class="chapter" id="change">
+    <div class="chapter-header">
+      <span class="chapter-num">Module</span>
+      <h2 class="chapter-title">Managing Change &amp; Disruptive Innovation</h2>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Definitions</div>
+      <div class="def-grid">
+        <div class="def-item"><span class="def-term">Change Agent</span><span class="def-body">A catalyst who initiates and manages the change process.</span></div>
+        <div class="def-item"><span class="def-term">VUCA</span><span class="def-body">Volatility, Uncertainty, Complexity, Ambiguity — the modern operating environment.</span></div>
+        <div class="def-item"><span class="def-term">Creativity</span><span class="def-body">Combining ideas in a unique way. <em>(The idea.)</em></span></div>
+        <div class="def-item"><span class="def-term">Innovation</span><span class="def-body">Turning creative ideas into useful products or methods. <em>(The result.)</em></span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Two Metaphors for Change</div>
+      <div class="framework-grid">
+        <div class="framework-card">
+          <div class="fc-title">🌊 Calm Waters (Lewin)</div>
+          <div class="fc-body"><strong>Unfreeze</strong> → prepare people for change<br><strong>Change</strong> → implement the new approach<br><strong>Refreeze</strong> → sustain and stabilize</div>
+        </div>
+        <div class="framework-card">
+          <div class="fc-title">🌪 White-Water Rapids</div>
+          <div class="fc-body">Constant disruption is the norm. Managers must learn and adapt <em>continuously</em> — there is no stable state to refreeze into.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Techniques to Reduce Resistance</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Technique</th><th>Best When…</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Education + Communication</td><td>Misinformation exists</td><td>Explaining ERP benefits in multiple languages</td></tr>
+            <tr><td>Participation</td><td>People have relevant expertise</td><td>Letting staff redesign customer flow</td></tr>
+            <tr><td>Coercion</td><td>Urgent legal or safety issues</td><td>Mandating new safety protocols</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-title">⚠ Common Mistake</div>
+      Don't confuse <strong>Creativity</strong> (the idea) with <strong>Innovation</strong> (making it real and useful). They are not the same thing.
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-title">⭐ High Yield</div>
+      <strong>Sustaining vs. Disruptive Innovation</strong> — Sustaining improves existing products for existing customers. Disruptive radically changes industry rules, often serving a different or new market first.
+    </div>
+
+    <div class="section">
+      <div class="section-label">High-Yield Summary</div>
+      <div class="summary-list">
+        <div class="summary-item">Change is the "operating system," not a one-time event.</div>
+        <div class="summary-item">Managers change Strategy, Structure, Technology, and People.</div>
+        <div class="summary-item">Resistance stems from uncertainty, habit, fear of loss, and goal mismatch.</div>
+        <div class="summary-item">Reducing resistance requires communication, participation, and support.</div>
+        <div class="summary-item">Disruptive innovation radically changes industry rules from the bottom up.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('.chapter');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
